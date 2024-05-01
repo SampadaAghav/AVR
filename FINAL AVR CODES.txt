@@ -1,0 +1,241 @@
+ ****************************************Assign 2: Daynight
+
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class SceneChanger : MonoBehaviour
+{
+    public void ChangeScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void OnMouseDown()
+    {
+        ChangeScene("Night");
+    }
+}
+
+
+
+
+**********************************************Assign 3: Candle
+
+using UnityEngine;
+
+public class TogglePlaneVisibility : MonoBehaviour
+{
+    private Renderer planeRenderer; // Reference to the Renderer component of the plane
+
+    void Start()
+    {
+        // Get the Renderer component attached to the plane object
+        planeRenderer = GetComponent<Renderer>();
+
+        // Initially hide the plane
+        HidePlane();
+    }
+
+    void Update()
+    {
+        // Check if mouse button is clicked
+        if (Input.GetMouseButtonDown(0))
+        {
+            // Toggle visibility of the plane
+            if (planeRenderer.enabled)
+                HidePlane();
+            else
+                ShowPlane();
+        }
+    }
+
+    // Function to show the plane
+    void ShowPlane()
+    {
+        planeRenderer.enabled = true;
+    }
+
+    // Function to hide the plane
+    void HidePlane()
+    {
+        planeRenderer.enabled = false;
+    }
+}
+
+
+
+***********************************Assign 4: emotion
+
+using UnityEngine;
+public class ChangeSprite : MonoBehaviour
+{
+    public Sprite happySprite;
+    public Sprite sadSprite;
+    public Sprite angrySprite;
+    private SpriteRenderer spriteRenderer;
+
+    void Start()
+    {
+        // Ensure that a SpriteRenderer component is attached to the GameObject
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer == null)
+        {
+            Debug.LogError("SpriteRenderer component not found!");
+        }
+        else
+        {
+            // Initialize sprite to the first assigned sprite (in case none of the keys are pressed initially)
+            SetSprite(happySprite);
+        }
+    }
+
+    void Update()
+    {
+        // Check for input to change the sprite
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            SetSprite(happySprite);
+        }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            SetSprite(sadSprite);
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            SetSprite(angrySprite);
+        }
+    }
+
+    void SetSprite(Sprite newSprite)
+    {
+        // Check if newSprite is assigned and SpriteRenderer component exists
+        if (newSprite != null && spriteRenderer != null)
+        {
+            spriteRenderer.sprite = newSprite;
+        }
+        else
+        {
+            Debug.LogWarning("New sprite or SpriteRenderer not assigned.");
+        }
+    }
+}
+
+
+*******************************************Assign 5: Ball kick
+
+using UnityEngine;
+
+public class BallController : MonoBehaviour
+{
+    public float kickForce1 = 5f; // Speed 1
+    public float kickForce2 = 10f; // Speed 2
+    public float kickForce3 = 15f; // Speed 3
+
+    private Rigidbody rb;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            KickBall(kickForce1);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            KickBall(kickForce2);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            KickBall(kickForce3);
+        }
+    }
+
+    void KickBall(float kickForce)
+    {
+        rb.velocity = Vector3.zero; // Reset ball velocity
+        rb.AddForce(Vector3.forward * kickForce, ForceMode.Impulse);
+    }
+}
+
+
+
+
+
+
+
+********************************** Assignment 7 – Table  and Assignment 13 – Collision ***********************************
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerMovement : MonoBehaviour
+{
+    public float speed = 5.0f;
+    private float horizontalInput;
+    private float forwardInput;
+    // Start is called before the first frame update
+    void Start()
+    {
+
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        horizontalInput = Input.GetAxis("Horizontal");
+        forwardInput = Input.GetAxis("Vertical");
+
+        transform.Translate(Vector3.forward * Time.deltaTime * speed * forwardInput);
+        transform.Translate(Vector3.right * Time.deltaTime * speed * horizontalInput);
+    }
+}
+
+
+
+
+
+****************************** Assignment 11 and Assignment 12 2D character Controller *********************************
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TriMovement : MonoBehaviour
+{
+    public float speed = 5.0f;
+    private float horizontalInput;
+    private float forwardInput;
+    // Start is called before the first frame update
+    void Start()
+    {
+
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        horizontalInput = Input.GetAxis("Horizontal");
+        forwardInput = Input.GetAxis("Vertical");
+
+        transform.Translate(Vector3.forward * Time.deltaTime * speed * forwardInput);
+        transform.Translate(Vector3.right * Time.deltaTime * speed * horizontalInput);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
